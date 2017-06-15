@@ -67,10 +67,34 @@ class Halde:
             self.zuklein(eltern)
 
     def Anzahl_kleiner(self,k):
-        self.keysLower=[]
-        self.allKeys=self.inHalde.values()
-        for schluessel in self.allKeys:
-            if schluessel < k:
-                self.keysLower.append(schluessel)
+        '''Berechnung der Anzahl der Schlüssel in der Halde, die kleiner als der gegebenen Schlüssel k sind'''
 
-        print("Anzahl der Schlüssel kleiner als ",k,":",len(self.keysLower))
+        if type(k) != int:
+            raise TypeError("Der Schlüssel muss vom Typ Integer sein!")
+
+        counter = 1
+        while self.inHalde[self.werte[counter]] < k:
+            counter += 1
+
+        print("Anzahl der Schlüssel kleiner als ",k,":",counter-1)
+
+
+# Erstellen einer neuen Halde
+neueHalde=Halde()
+neueHalde.einfügen(11,8)
+neueHalde.einfügen(8,3)
+neueHalde.einfügen(12,8)
+neueHalde.einfügen(9,5)
+neueHalde.einfügen(1,2)
+neueHalde.einfügen(25,4)
+
+print("##### Aufgabe 38 #####")
+print("Berechnung der Anzahl der Schlüssel in der Halde, die kleiner als k = 5 sind")
+neueHalde.Anzahl_kleiner(5)
+print("##### Ende #####")
+
+# Begründung der Laufzeit:
+# Durch das Iterieren über die Werte der Halde, erhalten wir die Schlüssel in sortierter Reihenfolge und können
+# und wissen, sobald ein Schlüssel größer gleich k ist, auch alle nachfolgenden Schlüssel größer gleich k sind.
+# Dadurch können wir nach m Schlüsseln abbrechen und erhalten eine Laufzeit von O(m).
+
